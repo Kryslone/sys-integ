@@ -15,10 +15,14 @@ console.log(process.env.REACT_APP_API_URL);
 const allowedOrigins = [
   'http://localhost:3000',
   'https://attendance-and-notes-system.netlify.app',
-  'https://next-auro.vercel.app'
+  'https://next-auro.vercel.app',
+  'https://itmc321announcements.onrender.com',
+  'http://localhost:8000',
+  'http://localhost:5173',
 ];
 
 app.use(cors({
+
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
