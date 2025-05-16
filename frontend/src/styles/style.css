@@ -21,7 +21,7 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(51, 65, 85, 0.7);
+  background: rgba(51, 65, 85, 0.7); 
   border-radius: 4px;
 }
 
@@ -152,6 +152,17 @@ section .wave span:nth-child(3) {
 
 /* minute screen */
 
+.wave-text {
+  display: block;
+  max-width: 60vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+}
+
 .wave-text span {
   display: inline-block;
   font-size: 2rem; 
@@ -255,7 +266,7 @@ section .wave span:nth-child(3) {
   color: white;
   background-color: #4973ff; 
   font-family: inherit; 
-  font-weight: 600;
+  font-weight: 600; 
   font-size: 1rem;
   border-radius: 0.5rem;
   height: 2.5rem; 
@@ -282,7 +293,7 @@ section .wave span:nth-child(3) {
   color: white;
 }
 
-
+/* Status button styles */
 .status-btn {
   background-color: #4973ff;
   color: white;

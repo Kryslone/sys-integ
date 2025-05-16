@@ -21,7 +21,7 @@ function MeetingNotesList() {
               console.log(statusRes);
               const ticketData = statusRes.data.ticket[0] || {};
               const ticketStatus = ticketData.status || 'Unavailable';
-              const remarks = ticketData.remarks || ''; //for remarks once the field is available
+              const remarks = ticketData.remarks || ''; 
               return { ...note, ticketStatus, remarks };
             } catch (err) {
               return { ...note, ticketStatus: 'Unavailable', remarks: '' };

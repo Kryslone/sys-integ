@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getNoteById, updateNote, deleteNote } from '../../services/notesService';
-import Swal from 'sweetalert2';
 import { getAllUsers } from '../../services/userService';
 
 const MinuteNoteDetail = () => {
@@ -27,13 +26,13 @@ const MinuteNoteDetail = () => {
 
         setNote(noteResponse.data);
         setEditedContent(noteResponse.data.content);
-        setOriginalContent(noteResponse.data.content); // Save original content
+        setOriginalContent(noteResponse.data.content); 
         setUsers(sortedUsers);
 
         if (noteResponse.data.attendees) {
           const attendeeIds = noteResponse.data.attendees.map(String);
           setSelectedAttendees(attendeeIds);
-          setOriginalAttendees(attendeeIds); // Save original attendees
+          setOriginalAttendees(attendeeIds);
         }
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -55,35 +54,12 @@ const MinuteNoteDetail = () => {
     } catch (err) {
       console.error('Error saving note:', err);
     }
-    Swal.fire({
-          icon: 'success',
-          title: 'Note Saved!',
-          text: 'Meeting note successfully saved.',
-          confirmButtonColor: '#3085d6'
-        });
   };
 
   const handleDelete = async () => {
-    const result = await Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you really want to delete this note?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel'
-    });
-
-    if (result.isConfirmed) {
+    if (window.confirm("Are you sure you want to delete this note?")) {
       try {
         await deleteNote(id);
-        Swal.fire({
-          icon: 'success',
-          title: 'Deleted!',
-          text: 'Meeting note deleted successfully.',
-          confirmButtonColor: '#3085d6'
-        });
         navigate('/meeting_screen');
       } catch (err) {
         console.error('Error deleting note:', err);
@@ -205,27 +181,45 @@ const MinuteNoteDetail = () => {
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           marginBottom: '2rem',
           flexWrap: 'wrap',
-          gap: '1rem'
+          gap: '1rem',
+          minHeight: '3.5rem',
         }}>
-          <h1 className="wave-text" style={{
-            margin: 0,
-            fontWeight: '600',
-            textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-            display: 'flex',
-            gap: '0.2rem',
-            color: 'white',
-          }}>
+          <h1
+            className="wave-text"
+            style={{
+              margin: 0,
+              fontWeight: '600',
+              textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+              display: 'block',
+              color: 'white',
+              maxWidth: '60vw',
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              lineHeight: '1.2',
+              fontSize: '2rem',
+              flex: '1 1 0',
+              minWidth: 0,
+              marginRight: '1rem',
+            }}
+          >
             {note.title.split('').map((char, index) => (
               <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>
-                {char === ' ' ? '\u00A0' : char} {/* Handle spaces */}
+                {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
           </h1>
 
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div style={{
+            display: 'flex',
+            gap: '1rem',
+            flexShrink: 0,
+            alignItems: 'center',
+            marginTop: 0,
+            minWidth: 'fit-content',
+          }}>
             {isEditing ? (
               <>
                 <button
@@ -438,7 +432,7 @@ const MinuteNoteDetail = () => {
                 paddingRight: '0.5rem',
               }}
             >
-              {/* Selected Attendees */}
+              {}
               <div style={{
                 marginBottom: '1rem',
                 padding: '1rem',
@@ -485,14 +479,14 @@ const MinuteNoteDetail = () => {
                 </ul>
               </div>
 
-              {/* Divider */}
+              {}
               <div style={{
                 height: '1px',
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                 margin: '1rem 0'
               }}></div>
 
-              {/* Unselected Attendees */}
+              {}
               <div style={{
                 padding: '1rem',
                 borderRadius: '8px',
